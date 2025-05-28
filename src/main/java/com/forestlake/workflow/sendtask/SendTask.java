@@ -1,6 +1,7 @@
 package com.forestlake.workflow.sendtask;
 
 
+import org.apache.tools.ant.taskdefs.Sleep;
 import org.camunda.bpm.engine.RuntimeService;
 import org.camunda.bpm.engine.delegate.DelegateExecution;
 import org.camunda.bpm.engine.delegate.JavaDelegate;
@@ -30,7 +31,8 @@ public class SendTask implements JavaDelegate {
             "http://localhost:10006/sendMessage"
             // 添加更多服务地址
     );
-    public static void sendPostRequest(String url, String messageName, String businessKey) throws IOException {
+    public static void sendPostRequest(String url, String messageName, String businessKey) throws IOException, InterruptedException {
+        Thread.sleep(2000); // 暂停 2000 毫秒，即 2 秒
         HttpURLConnection connection = (HttpURLConnection) new URL(url).openConnection();
         connection.setRequestMethod("POST");
         connection.setRequestProperty("Content-Type", "application/json;charset=UTF-8");
